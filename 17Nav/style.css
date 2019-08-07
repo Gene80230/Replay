@@ -1,0 +1,17 @@
+*{margin:0;padding:0;}
+main{
+    text-align:center;
+}
+.content{
+    display: inline-block;
+}
+.content kbd{
+display:inline-block;
+width:2em;
+height:2em;
+border:1px solid #000;
+text-transform:uppercase;
+}
+.content div:nth-child(3){
+margin-left:-1em;
+}
