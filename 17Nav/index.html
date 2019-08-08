@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./style.css">
-    <title>Document</title>
+    <title>导航36Start</title>
 </head>
 <body>
     <header></header>
@@ -29,7 +29,7 @@ var hash = {
     'r':'renren.com',
     'y':'youku.com',
     'u':'uc.com',
-    'i':'iqiyi.com',
+    'i':'iciba.com',
     'a':'acfun.tv',
     'z':'zhihu.com',
     'b':'bilibili.com',
@@ -46,6 +46,15 @@ while(index < keys.length){
     while(index2 < row.length){
         var kbd = document.createElement('kbd')
         kbd.textContent = row[index2]
+        var btn = document.createElement('button')
+        btn.id = row[index2]
+        btn.innerHTML = '编辑'
+        btn.onclick = function(e){
+            var keys = e.target.id
+            var enter = prompt('请给我一个网址www.')
+            hash[keys] = enter
+        }
+        kbd.appendChild(btn)
         div1.appendChild(kbd)
         index2++
     }
@@ -55,6 +64,7 @@ while(index < keys.length){
 document.onkeypress = function(e){
     var key = e.key
     var website = hash[key]
+    //location.href = 'http://' + website
     window.open('http://' + website,'_blank')
 }
 

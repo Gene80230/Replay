@@ -1,17 +1,25 @@
 *{margin:0;padding:0;}
-main{
-    text-align:center;
-}
-.content{
-    display: inline-block;
-}
+main{text-align:center;}
+.content{display: inline-block;}
 .content kbd{
 display:inline-block;
-width:2em;
-height:2em;
+width:4em;
+height:4em;
 border:1px solid #000;
 text-transform:uppercase;
+margin-left:2px;
+position:relative;
+}
+.content kbd button{
+position:absolute;
+right:2px;
+bottom:2px;
+font-size:12px;
+display:none;
+}
+.content kbd:hover button{
+display:inline-block;
 }
 .content div:nth-child(3){
-margin-left:-1em;
+margin-left:-3em;
 }
