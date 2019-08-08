@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./style.css">
-    <title>导航36Start</title>
+    <title>myBookmarks</title>
 </head>
 <body>
     <header></header>
@@ -36,6 +36,11 @@ var hash = {
     'm':'music.163.com'
 }
 
+var hashLocalStorage = JSON.parse(localStorage.getItem('zzz') || 'null') 
+
+if(hashLocalStorage){
+    hash = hashLocalStorage
+}
 var index = 0
 while(index < keys.length){
     var div1 = document.createElement('div')
@@ -53,6 +58,8 @@ while(index < keys.length){
             var keys = e.target.id
             var enter = prompt('请给我一个网址www.')
             hash[keys] = enter
+            localStorage.setItem('zzz', JSON.stringify(hash))
+            console.log(hash)
         }
         kbd.appendChild(btn)
         div1.appendChild(kbd)
