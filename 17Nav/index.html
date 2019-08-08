@@ -52,6 +52,12 @@ while(index < keys.length){
     index++
 }
 
+document.onkeypress = function(e){
+    var key = e.key
+    var website = hash[key]
+    window.open('http://' + website,'_blank')
+}
+
 </script>
 </body>
 </html>
