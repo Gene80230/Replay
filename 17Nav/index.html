@@ -43,13 +43,15 @@ if(hashLocalStorage){
 }
 var index = 0
 while(index < keys.length){
-    var div1 = document.createElement('div')
-    content.appendChild(div1)
+    var div = document.createElement('div')
+    div.className = 'row' 
+    content.appendChild(div)
 
     var row = keys[index]  //第一个数组  第二个数组  第三个数组
     var index2 = 0
     while(index2 < row.length){
         var kbd = document.createElement('kbd')
+        kbd.className = 'key'
         kbd.textContent = row[index2]
         var btn = document.createElement('button')
         btn.id = row[index2]
@@ -59,10 +61,10 @@ while(index < keys.length){
             var enter = prompt('请给我一个网址www.')
             hash[keys] = enter
             localStorage.setItem('zzz', JSON.stringify(hash))
-            console.log(hash)
+            
         }
         kbd.appendChild(btn)
-        div1.appendChild(kbd)
+        div.appendChild(kbd)
         index2++
     }
     index++
