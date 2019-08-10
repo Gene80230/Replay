@@ -27,13 +27,14 @@ var hash = {
     'w':'weibo.com',
     'e':'ele.com',
     'r':'renren.com',
-    'y':'youku.com',
-    'u':'uc.com',
-    'i':'iciba.com',
-    'a':'acfun.tv',
+   
+    'y':'yyetss.com',
+    
+    'a':'acfun.cn',
+    'g':'google.cn',
     'z':'zhihu.com',
     'b':'bilibili.com',
-    'm':'music.163.com'
+    
 }
 
 var hashLocalStorage = JSON.parse(localStorage.getItem('zzz') || 'null') 
@@ -51,18 +52,34 @@ while(index < keys.length){
     var index2 = 0
     while(index2 < row.length){
         var kbd = document.createElement('kbd')
-        kbd.className = 'key'
-        kbd.textContent = row[index2]
+        var img = document.createElement('img')
+        var span = document.createElement('span')
         var btn = document.createElement('button')
+        span.className = "text"
+        span.textContent = row[index2]
+
+        kbd.appendChild(span)
+        kbd.className = 'key'
+
         btn.id = row[index2]
         btn.innerHTML = '编辑'
+
+        if(hash[row[index2]]){
+            img.src="http://" + hash[row[index2]] + '/favicon.ico'
+        }else{
+            img.src="//i.loli.net/2017/11/10/5a05afbc5e183.png"
+        }
+        img.onerror = function(e){ 
+            e.target.src="//i.loli.net/2017/11/10/5a05afbc5e183.png"
+        }
         btn.onclick = function(e){
             var keys = e.target.id
             var enter = prompt('请给我一个网址www.')
             hash[keys] = enter
             localStorage.setItem('zzz', JSON.stringify(hash))
-            
         }
+
+        kbd.appendChild(img)
         kbd.appendChild(btn)
         div.appendChild(kbd)
         index2++
