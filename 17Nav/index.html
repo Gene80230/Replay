@@ -16,6 +16,7 @@
     <footer></footer>
 
 <script>
+    // 1.初始化代码
 var keys = {
     0:['q','w','e','r','t','y','u','i','o','p'],
     1:['a','s','d','f','g','h','j','k','l'],
@@ -23,22 +24,38 @@ var keys = {
     length:3
 }
 var hash = {
-    'q':'qq.com',
+    'q':'quora.com',
     'w':'weibo.com',
     'e':'ele.com',
     'r':'renren.com',
+    't':'tencent.com',
    
     'y':'yyetss.com',
     
     'a':'acfun.cn',
+    's':'study.163.com',
+
+    
     'g':'google.cn',
+    'h':'huorong.cn',
+
+    
+    'j':'jianshu.com',
+    'o':'officeplus.cn',
+    'p':'products.office.com',
+    
+    
     'z':'zhihu.com',
     'b':'bilibili.com',
-    
+    'm':'mp.weixin.qq.com'
+   
 }
 
 var hashLocalStorage = JSON.parse(localStorage.getItem('zzz') || 'null') 
 
+
+// 2. 生成键盘
+//遍历keys,生成kbd标签
 if(hashLocalStorage){
     hash = hashLocalStorage
 }
@@ -73,9 +90,17 @@ while(index < keys.length){
             e.target.src="//i.loli.net/2017/11/10/5a05afbc5e183.png"
         }
         btn.onclick = function(e){
-            var keys = e.target.id
+            var btn2 = e.target
+            var img2 = btn2.previousSibling
+            
+            var keys = btn2.id
             var enter = prompt('请给我一个网址www.')
             hash[keys] = enter
+            img2.src = 'http://' + enter + '/favicon.ico'
+            img2.onerror = function(e){ 
+                e.target.src="//i.loli.net/2017/11/10/5a05afbc5e183.png"
+            }
+            
             localStorage.setItem('zzz', JSON.stringify(hash))
         }
 
@@ -87,6 +112,7 @@ while(index < keys.length){
     index++
 }
 
+// 3. 监听键盘事件
 document.onkeypress = function(e){
     var key = e.key
     var website = hash[key]
