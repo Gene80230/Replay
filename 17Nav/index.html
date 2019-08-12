@@ -10,7 +10,7 @@
 <body>
     <header></header>
     <main>
-        <div id="content" class="content"></div>
+        <div id="main" class="content"></div>
     </main>
     
     <footer></footer>
@@ -28,7 +28,6 @@
     // 3. 监听用户动作
     listenToUser(hash)
     
-
 
 //下面是工具函数
 
@@ -102,6 +101,7 @@ function init(){
         'g':'google.cn',
         'h':'huaban.com',
         'j':'jianshu.com',
+        'k':'36kr.com',
         'l':'linkedin.com',
         
         'z':'zhihu.com',
@@ -126,7 +126,7 @@ function init(){
         var div = create('div')
         div.className = 'row' 
 
-        content.appendChild(div)
+        main.appendChild(div)
         var row = keys[index]  //第一个数组  第二个数组  第三个数组
             for(var index2=0;index2<row.length;index2++){
                 var span = createSpan(row[index2])
