@@ -24,50 +24,15 @@
 <script>
 
 var canvas = document.getElementById('canvas')
-const content = canvas.getContext('2d');
+var content = canvas.getContext('2d');
 
-reset()
+autoSetCanvas(canvas)
+listenToMouse(canvas)
 
-//当视口改变后重置
-window.onresize = function(){
-  reset()
-}
 
-var using = false
-var lastPoint = {x:undefined, y:undefined}
-   
-canvas.onmousedown = function(e){
-   var x = e.clientX
-   var y = e.clientY
-   if(eraserEnabled){
-     using = true
-     content.clearRect(x-5, y-5, 10, 10)
-   }else{
-     using = true
-     lastPoint = {'x':x, 'y':y}
-   }
-   
-}
-
-canvas.onmousemove = function(e){
-  var x = e.clientX
-  var y = e.clientY
-  if(eraserEnabled){
-    if(using){
-       content.clearRect(x-5, y-5, 10, 10)
-    }
-  }else{
-    if(using){
-     
-     var newPoint = {'x':x, 'y':y}
-     drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y)
-     lastPoint = newPoint
-   }
-  }  
-}
-
-canvas.onmouseup = function(e){
-   using = false
+var eraserEnabled = false
+eraser.onclick = function(){
+  eraserEnabled = !eraserEnabled
 }
 
 function drawCircle(x, y, radius){
@@ -85,17 +50,60 @@ function drawLine(x1, y1, x2 ,y2){
  content.closePath();
 }
 
-//让canvas的宽、高跟视口一致
-function reset(){
-  var pageWidth = document.documentElement.clientWidth
-  var pageHeight = document.documentElement.clientHeight
-  canvas.width = pageWidth
-  canvas.height = pageHeight
+//自动重置宽高
+function autoSetCanvas(canvas){
+  setCanvasSize()
+  //当视口改变后重置
+  window.onresize = function(){
+    setCanvasSize()
+  }
+  //让canvas的宽、高跟视口一致
+  function setCanvasSize(){
+    var pageWidth = document.documentElement.clientWidth
+    var pageHeight = document.documentElement.clientHeight
+    canvas.width = pageWidth
+    canvas.height = pageHeight
+  }
 }
 
-var eraserEnabled = false
-eraser.onclick = function(){
-  eraserEnabled = !eraserEnabled
+
+function listenToMouse(canvas){
+  var using = false
+  var lastPoint = {x:undefined, y:undefined}
+   
+  canvas.onmousedown = function(e){
+    var x = e.clientX
+    var y = e.clientY
+    if(eraserEnabled){
+      using = true
+      content.clearRect(x-5, y-5, 10, 10)
+    }else{
+      using = true
+      lastPoint = {'x':x, 'y':y}
+    }
+    
+  }
+
+  canvas.onmousemove = function(e){
+    var x = e.clientX
+    var y = e.clientY
+    if(eraserEnabled){
+      if(using){
+        content.clearRect(x-5, y-5, 10, 10)
+      }
+    }else{
+      if(using){
+      
+      var newPoint = {'x':x, 'y':y}
+      drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y)
+      lastPoint = newPoint
+    }
+    }  
+  }
+
+  canvas.onmouseup = function(e){
+    using = false
+  }
 }
 </script>
 </body>
