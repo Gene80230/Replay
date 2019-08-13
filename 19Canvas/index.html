@@ -11,16 +11,23 @@
         background:#FC9B9F;
         display:block;
     }
-    button{
+    .action{
       position:fixed;
       left:0;
       bottom:0;
     }
+    .action > #brush{display:none;}
+    .action.x > #eraser{display:none;}
+    .action.x > #brush{display:inline-block;}
     </style>
 </head>
 <body>
     <canvas id="canvas" width=400 height=400></canvas>
-    <button id=eraser>橡皮擦</button>
+    <div id="action" class="action">
+      <button id=eraser>橡皮擦</button>
+      <button id=brush>画笔</button>
+    </div>
+    
 <script>
 
 var canvas = document.getElementById('canvas')
@@ -33,6 +40,11 @@ listenToMouse(canvas)
 var eraserEnabled = false
 eraser.onclick = function(){
   eraserEnabled = !eraserEnabled
+  action.className = 'action x'
+}
+brush.onclick = function(){
+  eraserEnabled = !eraserEnabled
+  action.className = 'action'
 }
 
 function drawCircle(x, y, radius){
