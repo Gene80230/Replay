@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    body{margin:0;}
+    canvas{
+        background:#FC9B9F;
+        display:block;
+    }
+    button{
+      position:fixed;
+      left:0;
+      bottom:0;
+    }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width=400 height=400></canvas>
+    <button id=eraser>橡皮擦</button>
+<script>
+
+var canvas = document.getElementById('canvas')
+const content = canvas.getContext('2d');
+
+reset()
+
+//当视口改变后重置
+window.onresize = function(){
+  reset()
+}
+
+var using = false
+var lastPoint = {x:undefined, y:undefined}
+   
+canvas.onmousedown = function(e){
+   var x = e.clientX
+   var y = e.clientY
+   if(eraserEnabled){
+     using = true
+     content.clearRect(x-5, y-5, 10, 10)
+   }else{
+     using = true
+     lastPoint = {'x':x, 'y':y}
+   }
+   
+}
+
+canvas.onmousemove = function(e){
+  var x = e.clientX
+  var y = e.clientY
+  if(eraserEnabled){
+    if(using){
+       content.clearRect(x-5, y-5, 10, 10)
+    }
+  }else{
+    if(using){
+     
+     var newPoint = {'x':x, 'y':y}
+     drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y)
+     lastPoint = newPoint
+   }
+  }  
+}
+
+canvas.onmouseup = function(e){
+   using = false
+}
+
+function drawCircle(x, y, radius){
+  content.beginPath();
+  content.arc(x, y, radius, 0, Math.PI * 2);
+  content.stroke();
+}
+
+function drawLine(x1, y1, x2 ,y2){
+ content.beginPath();
+  content.lineWidth = 5;
+ content.moveTo(x1, y1);
+ content.lineTo(x2 ,y2);
+ content.stroke();
+ content.closePath();
+}
+
+//让canvas的宽、高跟视口一致
+function reset(){
+  var pageWidth = document.documentElement.clientWidth
+  var pageHeight = document.documentElement.clientHeight
+  canvas.width = pageWidth
+  canvas.height = pageHeight
+}
+
+var eraserEnabled = false
+eraser.onclick = function(){
+  eraserEnabled = !eraserEnabled
+}
+</script>
+</body>
+</html>
