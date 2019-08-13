@@ -74,30 +74,24 @@ function listenToMouse(canvas){
   canvas.onmousedown = function(e){
     var x = e.clientX
     var y = e.clientY
+    using = true
     if(eraserEnabled){
-      using = true
       content.clearRect(x-5, y-5, 10, 10)
-    }else{
-      using = true
+    }else{  
       lastPoint = {'x':x, 'y':y}
     }
-    
   }
 
   canvas.onmousemove = function(e){
     var x = e.clientX
     var y = e.clientY
+    if(!using) return
     if(eraserEnabled){
-      if(using){
         content.clearRect(x-5, y-5, 10, 10)
-      }
     }else{
-      if(using){
-      
       var newPoint = {'x':x, 'y':y}
       drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y)
       lastPoint = newPoint
-    }
     }  
   }
 
