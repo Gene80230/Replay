@@ -9,16 +9,38 @@ listenToUse(canvas)
 var eraserEnabled = false
 Signingpen.onclick = function(){
   eraserEnabled = false
-  Signingpen.classList = 'icon active'
-  eraser.classList = 'icon'
+  Signingpen.classList.add('active')
+  eraser.classList.remove('active')
 }
 eraser.onclick = function(){
   eraserEnabled = true
-  eraser.classList = 'icon active'
-  Signingpen.classList = 'icon'
+  eraser.classList.add('active')
+  Signingpen.classList.remove('active')
+}
+
+// 画笔颜色
+red.onclick = function(){
+  content.strokeStyle = 'red'
+  red.classList.add('active')
+  green.classList.remove('active')
+  blue.classList.remove('active')
+}
+green.onclick = function(){
+  content.strokeStyle = 'green'
+  green.classList.add('active')
+  red.classList.remove('active')
+  blue.classList.remove('active')
+}
+blue.onclick = function(){
+  content.strokeStyle = 'blue'
+  blue.classList.add('active')
+  green.classList.remove('active')
+  red.classList.remove('active')
 }
 
 
+
+// 下面是工具函数
 function drawCircle(x, y, radius){
   content.beginPath();
   content.arc(x, y, radius, 0, Math.PI * 2);
@@ -27,7 +49,7 @@ function drawCircle(x, y, radius){
 
 function drawLine(x1, y1, x2 ,y2){
  content.beginPath();
-  content.lineWidth = 5;
+ content.lineWidth = 5;
  content.moveTo(x1, y1);
  content.lineTo(x2 ,y2);
  content.stroke();
