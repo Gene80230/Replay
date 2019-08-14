@@ -7,14 +7,17 @@ listenToUse(canvas)
 
 
 var eraserEnabled = false
+Signingpen.onclick = function(){
+  eraserEnabled = false
+  Signingpen.classList = 'icon active'
+  eraser.classList = 'icon'
+}
 eraser.onclick = function(){
-  eraserEnabled = !eraserEnabled
-  action.className = 'action x'
+  eraserEnabled = true
+  eraser.classList = 'icon active'
+  Signingpen.classList = 'icon'
 }
-brush.onclick = function(){
-  eraserEnabled = !eraserEnabled
-  action.className = 'action'
-}
+
 
 function drawCircle(x, y, radius){
   content.beginPath();
@@ -53,12 +56,10 @@ function listenToUse(canvas){
   var lastPoint = {x:undefined, y:undefined}
    
   if(document.body.ontouchstart !== undefined){
-    //是触摸设备
-    canvas.ontouchstart = function(e){
-      
+    //是触屏设备
+    canvas.ontouchstart = function(e){   
       var x = e.touches[0].clientX
       var y = e.touches[0].clientY
-      console.log(x,y)
       using = true
       if(eraserEnabled){
         content.clearRect(x-5, y-5, 10, 10)
@@ -82,7 +83,7 @@ function listenToUse(canvas){
       using = false
     }
   }else{
-    //不是触摸设备
+    //不是触屏设备
     canvas.onmousedown = function(e){
       var x = e.clientX
       var y = e.clientY

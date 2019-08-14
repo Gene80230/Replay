@@ -6,15 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Canvas</title>
     <link rel="stylesheet" href="./style.css">
-    <style>
-    
-    </style>
+    <script src="//at.alicdn.com/t/font_708830_6670rdrx62.js"></script>
 </head>
 <body>
     <canvas id="canvas" width=400 height=400></canvas>
     <div id="action" class="action">
-      <button id=eraser>橡皮擦</button>
-      <button id=brush>画笔</button>
+        <svg class="icon active" id="Signingpen" aria-hidden="true">
+            <use xlink:href="#icon-Signingpen"></use>
+        </svg>
+        <svg class="icon" id="eraser" aria-hidden="true">
+            <use xlink:href="#icon-eraser"></use>
+        </svg>
     </div>
     
 <script src="./main.js"></script>
