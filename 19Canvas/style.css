@@ -1,0 +1,13 @@
+body{margin:0;}
+canvas{
+    background:#FC9B9F;
+    display:block;
+}
+.action{
+    position:fixed;
+    left:0;
+    bottom:0;
+}
+.action > #brush{display:none;}
+.action.x > #eraser{display:none;}
+.action.x > #brush{display:inline-block;}
