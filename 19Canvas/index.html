@@ -9,7 +9,7 @@
     <script src="//at.alicdn.com/t/font_708830_6670rdrx62.js"></script>
 </head>
 <body>
-    <canvas id="canvas" width=400 height=400></canvas>
+    <canvas id="canvas"></canvas>
     <div id="action" class="action">
         <svg class="icon active" id="Signingpen" aria-hidden="true">
             <use xlink:href="#icon-Signingpen"></use>
@@ -17,11 +17,22 @@
         <svg class="icon" id="eraser" aria-hidden="true">
             <use xlink:href="#icon-eraser"></use>
         </svg>
+        <svg class="icon" id="clear" aria-hidden="true">
+            <use xlink:href="#icon-clear"></use>
+        </svg>
+        <svg class="icon" id="save" aria-hidden="true">
+            <use xlink:href="#icon-save"></use>
+        </svg>
     </div>
     <ul class="colors" id="colors">
+        <li class="black active" id="black"></li>
         <li class="red" id="red"></li>
         <li class="green" id="green"></li>
         <li class="blue" id="blue"></li>
+    </ul>
+    <ul class="sizes">
+        <li class="thin" id="thin"></li>
+        <li class="thick" id="thick"></li>
     </ul>
     
 <script src="./main.js"></script>

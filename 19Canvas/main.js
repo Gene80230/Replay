@@ -1,6 +1,6 @@
-
 var canvas = document.getElementById('canvas')
 var content = canvas.getContext('2d');
+var lineWidth = 2
 
 autoSetCanvas(canvas)
 listenToUse(canvas)
@@ -17,27 +17,56 @@ eraser.onclick = function(){
   eraser.classList.add('active')
   Signingpen.classList.remove('active')
 }
+clear.onclick = function(){
+  content.clearRect(0, 0, canvas.width, canvas.height)
+}
+save.onclick = function(){
+  src = canvas.toDataURL()
+  var a = document.createElement('a')
+  a.href = src
+  a.download = 'untitled.png'
+  document.body.appendChild(a)
+  a.click()
+}
 
 // 画笔颜色
+black.onclick = function(){
+  content.strokeStyle = 'black'
+  black.classList.add('active')
+  green.classList.remove('active')
+  red.classList.remove('active')
+  blue.classList.remove('active')
+}
 red.onclick = function(){
   content.strokeStyle = 'red'
   red.classList.add('active')
+  black.classList.remove('active')
   green.classList.remove('active')
   blue.classList.remove('active')
 }
 green.onclick = function(){
   content.strokeStyle = 'green'
   green.classList.add('active')
+  black.classList.remove('active')
   red.classList.remove('active')
   blue.classList.remove('active')
 }
 blue.onclick = function(){
   content.strokeStyle = 'blue'
   blue.classList.add('active')
+  black.classList.remove('active')
   green.classList.remove('active')
   red.classList.remove('active')
+
 }
 
+thin.onclick = function(){
+  lineWidth = 2
+}
+
+thick.onclick = function(){
+  lineWidth = 6
+}
 
 
 // 下面是工具函数
@@ -49,7 +78,7 @@ function drawCircle(x, y, radius){
 
 function drawLine(x1, y1, x2 ,y2){
  content.beginPath();
- content.lineWidth = 5;
+ content.lineWidth = lineWidth
  content.moveTo(x1, y1);
  content.lineTo(x2 ,y2);
  content.stroke();
@@ -74,6 +103,9 @@ function autoSetCanvas(canvas){
 
 
 function listenToUse(canvas){
+  //因为画板的背景是透明的，保存为灰色，我们需要让它一开始就是白色
+  content.fillStyle = 'white';
+  content.fillRect(0, 0, canvas.width, canvas.height);
   var using = false
   var lastPoint = {x:undefined, y:undefined}
    
